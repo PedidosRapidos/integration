@@ -26,7 +26,7 @@ async function run() {
     console.log(images);
     for (let i = 0; i < 4; ++i) {
       const { data: user } = await client.post("/users/register", {
-        username: `clien${i}`,
+        username: `client${i}`,
         email: `client${i}@client.com`,
         password: "PASS123",
         confirmPassword: "PASS123",
