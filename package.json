@@ -6,6 +6,7 @@
   "author": "Paulo Cesar Cuneo <cuneo.paulo.cesar@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "form-data": "^4.0.0"
   }
 }
