@@ -1,0 +1,11 @@
+{
+  "name": "integration",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:PedidosRapidos/integration.git",
+  "author": "Paulo Cesar Cuneo <cuneo.paulo.cesar@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
