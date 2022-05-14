@@ -62,8 +62,8 @@ async function run() {
           `/sellers/${seller.id}/shops/${shop.id}/products`,
           `./images/${image}`,
           {
-            name: image,
-            description: image,
+            name: `${image}-${i}-${j}`,
+            description: `${image}-${j} at shop ${i}`,
             price: parseInt(Math.random() * 1000),
           }
         );
