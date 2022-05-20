@@ -1,7 +1,7 @@
 const axios = require("axios");
 const fs = require("fs");
 const FormData = require("form-data");
-
+const { makeProduct } = require("./data");
 const API_HOST = "http://localhost:8080"; // "https://pedidos-rapidos.herokuapp.com";
 
 const client = axios.create({
@@ -27,15 +27,15 @@ async function replace(shopURL, imageURI, { name, description, price }) {
   });
 }
 
-async function upload(shopURL, imageURI, { name, description, price }) {
-  const filename = imageURI.split("/").pop();
+async function upload(shopURL, { image, name, description, price }) {
+  const filename = image.split("/").pop();
   const extention = /\/(\w+)\.(\w+)$/.exec(filename);
   const type = extention ? `image/${extention[2]}` : `image`;
   const formData = new FormData();
-  formData.append("name", name || extention[1]);
-  formData.append("description", description || extention[1]);
+  formData.append("name", name);
+  formData.append("description", description);
   formData.append("price", price);
-  formData.append("image", fs.createReadStream(imageURI));
+  formData.append("image", fs.createReadStream(image));
 
   console.log("uploading");
   return await client.post(shopURL, formData, {
@@ -43,10 +43,8 @@ async function upload(shopURL, imageURI, { name, description, price }) {
   });
 }
 
-const images = fs.readdirSync("./images");
 async function run() {
   try {
-    console.log(images);
     for (let i = 0; i < 4; ++i) {
       const { data: user } = await client.post("/users/register", {
         username: `client${i}`,
@@ -79,16 +77,10 @@ async function run() {
         address: `Calle ${i}`,
       });
       console.log("shop", shop);
-      for (let j = 0; j < images.length; ++j) {
-        const image = images[(i + j) % images.length];
+      for (let j = 0; j < 6; ++j) {
         const { data: product } = await upload(
           `/sellers/${seller.id}/shops/${shop.id}/products`,
-          `./images/${image}`,
-          {
-            name: `${image}-${i}-${j}`,
-            description: `${image}-${j} at shop ${i}`,
-            price: parseInt(Math.random() * 1000),
-          }
+          makeProduct(i * 6, j)
         );
         console.log("product", product);
       }
@@ -100,7 +92,6 @@ async function run() {
 
 console.log("running");
 run();
-console.log(images[1]);
 
 // replace(`/products/1`, null, {
 //   name: "new name",
