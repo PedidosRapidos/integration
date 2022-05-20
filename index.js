@@ -77,10 +77,10 @@ async function run() {
         address: `Calle ${i}`,
       });
       console.log("shop", shop);
-      for (let j = 0; j < 6; ++j) {
+      for (let j = 0; j < 8; ++j) {
         const { data: product } = await upload(
           `/sellers/${seller.id}/shops/${shop.id}/products`,
-          makeProduct(i * 6, j)
+          makeProduct(i * 8, j)
         );
         console.log("product", product);
       }
