@@ -2,7 +2,30 @@ const axios = require("axios");
 const fs = require("fs");
 const FormData = require("form-data");
 
-const client = axios.create({ baseURL: "http://localhost:8080" });
+const API_HOST = "http://localhost:8080"; // "https://pedidos-rapidos.herokuapp.com";
+
+const client = axios.create({
+  baseURL: API_HOST,
+});
+
+async function replace(shopURL, imageURI, { name, description, price }) {
+  const formData = new FormData();
+  if (imageURI) {
+    console.log("imageURI", imageURI);
+    const filename = imageURI.split("/").pop();
+    const extention = /\/?(\w+)\.(\w+)$/.exec(filename);
+    const type = extention ? `image/${extention[2]}` : `image`;
+    formData.append("image", fs.createReadStream(imageURI));
+  }
+  if (name) formData.append("name", name);
+  if (description) formData.append("description", description);
+  if (price) formData.append("price", price);
+
+  console.log("uploading");
+  return await client.put(shopURL, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+}
 
 async function upload(shopURL, imageURI, { name, description, price }) {
   const filename = imageURI.split("/").pop();
@@ -20,9 +43,9 @@ async function upload(shopURL, imageURI, { name, description, price }) {
   });
 }
 
+const images = fs.readdirSync("./images");
 async function run() {
   try {
-    const images = fs.readdirSync("./images");
     console.log(images);
     for (let i = 0; i < 4; ++i) {
       const { data: user } = await client.post("/users/register", {
@@ -77,5 +100,12 @@ async function run() {
 
 console.log("running");
 run();
+console.log(images[1]);
+
+// replace(`/products/1`, null, {
+//   name: "new name",
+//   description: "new description",
+//   price: 0,
+// });
 
 console.log("done");
