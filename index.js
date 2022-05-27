@@ -43,19 +43,8 @@ async function upload(shopURL, { image, name, description, price }) {
   });
 }
 
-async function run() {
+async function createShops() {
   try {
-    for (let i = 0; i < 4; ++i) {
-      const { data: user } = await client.post("/users/register", {
-        username: `client${i}`,
-        email: `client${i}@client.com`,
-        password: "PASS123",
-        confirmPassword: "PASS123",
-        isOwner: false,
-        isClient: true,
-      });
-      console.log("user", user);
-    }
     for (let i = 0; i < 4; ++i) {
       const { data: user } = await client.post("/users/register", {
         username: `shop${i}`,
@@ -77,10 +66,10 @@ async function run() {
         address: `Calle ${i}`,
       });
       console.log("shop", shop);
-      for (let j = 0; j < 8; ++j) {
+      for (let j = 0; j < 10; ++j) {
         const { data: product } = await upload(
           `/sellers/${seller.id}/shops/${shop.id}/products`,
-          makeProduct(i * 8, j)
+          makeProduct(i * 10, j)
         );
         console.log("product", product);
       }
@@ -90,13 +79,55 @@ async function run() {
   }
 }
 
+async function fillCart(user) {}
+
+async function createCustomers() {
+  try {
+    for (let i = 0; i < 5; ++i) {
+      let response = await client.post("/users/register", {
+        username: `client${i}`,
+        email: `client${i}@client.com`,
+        password: "PASS123",
+        confirmPassword: "PASS123",
+        isOwner: false,
+        isClient: true,
+      });
+      response = await client.post("/users/login", {
+        email: `client${i}@client.com`,
+        password: "PASS123",
+      });
+      const user = response.data;
+      console.log("user", user);
+      let cart;
+      for (let j = 0; j < i; ++j) {
+        const { data } = await client.post(
+          `/shopping_cart/${user.cartId}/products`,
+          {
+            product_id: i + 2,
+            quantity: 2,
+          }
+        );
+        cart = data;
+      }
+      console.log("cart", cart);
+
+      if (i % 2 === 1 && cart) {
+        const { data: order } = await client.post(`/orders/${cart.id}`, {
+          payment_method: "cash",
+        });
+        console.log("order", order);
+      }
+    }
+  } catch (e) {
+    console.error(JSON.stringify(e.response?.data || e.message || e));
+  }
+}
+
+async function run() {
+  await createShops();
+  await createCustomers();
+}
+
 console.log("running");
 run();
-
-// replace(`/products/1`, null, {
-//   name: "new name",
-//   description: "new description",
-//   price: 0,
-// });
-
 console.log("done");

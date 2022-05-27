@@ -6,7 +6,7 @@ const DATA = {
   ],
   "bass.jpeg": [
     "Bass",
-    "A bass musical instrument produces tones in the low-pitched range C4- C2. Basses belong to different families of instruments and can cover a wide range of musical roles. Since producing low pitches usually requires a long air column or string, the string and wind bass instruments are usually the largest instruments in their families or instrument classes",
+    "A bass musical instrument produces tones in the low-pitched range C4- C2. Basses belong to different families of instruments and can cover a wide range of musical roles.",
   ],
   "burger1.jpeg": [
     "Burger",
@@ -14,11 +14,11 @@ const DATA = {
   ],
   "burger2.jpeg": [
     "Gourmet Burger",
-    'Hamburgers are often served with cheese, lettuce, tomato, onion, pickles, bacon, or chilis; condiments such as ketchup, mustard, mayonnaise, relish, or a "special sauce", often a variation of Thousand Island dressing; and are frequently placed on sesame seed buns.',
+    'Hamburgers are often served with cheese, lettuce, tomato, onion, pickles, bacon, or chilis; condiments such as ketchup, mustard, mayonnaise, relish, or a "special sauce", often a variation of Thousand Island dressing',
   ],
   "burger3.jpeg": [
     "Cheedar Burger",
-    'A hamburger is a food consisting of fillings —usually a patty of ground meat, typically beef—placed inside a sliced bun or bread roll. Condiments such as ketchup, mustard, mayonnaise, relish, or a "special sauce", often a variation of Thousand Island dressing; and are frequently placed on sesame seed buns.',
+    'A hamburger is a food consisting of fillings —usually a patty of ground meat, typically beef—placed inside a sliced bun or bread roll. Condiments such as ketchup, mustard, mayonnaise, relish, or a "special sauce"',
   ],
   "cake1.jpeg": [
     "Dark Cake",
@@ -38,7 +38,7 @@ const DATA = {
   ],
   "cleaning2.jpeg": [
     "Cleaning Gloves",
-    "2 Pairs Reusable Cleaning Gloves - Latex Free Kitchen Cleaning Gloves with Cotton Liner- Household Dishwashing Gloves, Non- Slip Waterproof (Medium, Blue+Pink) 4.6 out of 5 stars. 73. $7.99. $7. . 99 ($23.50/Pound) Get it as soon as Wed, May 4. FREE Shipping on orders over $25 shipped by Amazon.",
+    "2 Pairs Reusable Cleaning Gloves - Latex Free Kitchen Cleaning Gloves with Cotton Liner- Household Dishwashing Gloves, Non- Slip Waterproof (Medium, Blue+Pink) 4.6 out of 5 stars. 73. $7.99. $7. . 99 ($23.50/Pound) Get it as soon as Wed, May 4",
   ],
   "cocacola.jpeg": [
     "Coke Can",
@@ -103,7 +103,7 @@ const DATA = {
   ],
   "plant1.jpeg": [
     "Shadow Plant",
-    "Photosynthetic nutrition (a characteristic possessed by all plants except some parasitic plants and underground orchids), in which chemical energy is produced from water, minerals, and carbon dioxide with the aid of pigments and the radiant energy of the Sun, (2) essentially unlimited growth at localized regions, (3) cells that contain cellulose in their walls and are therefore to some extent rigid,",
+    "Photosynthetic nutrition (a characteristic possessed by all plants except some parasitic plants and underground orchids), in which chemical energy is produced from water, minerals, and carbon dioxide with the aid of pigments",
   ],
   "plant2.jpeg": [
     "Desert Plant",
@@ -111,7 +111,7 @@ const DATA = {
   ],
   "plant3.jpeg": [
     "Shadow Plant 2 ",
-    "multicellular eukaryotic life-form characterized by (1) photosynthetic nutrition (a characteristic possessed by all plants aid of pigments and the radiant energy of the Sun, (2) essentially unlimited growth at localized regions, (3) cells that contain cellulose in their walls and are therefore to some extent rigid,",
+    "multicellular eukaryotic life-form characterized by (1) photosynthetic nutrition (a characteristic possessed by all plants aid of pigments and the radiant energy of the Sun, (2) essentially unlimited growth at localized regions,",
   ],
   "violin.jpeg": [
     "Violin",
