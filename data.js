@@ -121,7 +121,7 @@ const DATA = {
 
 const images = fs.readdirSync("./images");
 const makeProduct = (seller, shop) => {
-  const image = images[(seller + shop) % images.length];
+  const image = images[(seller * 10 + shop) % images.length];
   return {
     image: `./images/${image}`,
     name: `${DATA[image][0]} O${seller} S${shop}`,

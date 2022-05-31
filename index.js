@@ -45,7 +45,7 @@ async function upload(shopURL, { image, name, description, price }) {
 
 async function createShops() {
   try {
-    for (let i = 0; i < 4; ++i) {
+    for (let i = 1; i < 5; ++i) {
       const { data: user } = await client.post("/users/register", {
         username: `shop${i}`,
         email: `shop${i}@shops.com`,
@@ -69,7 +69,7 @@ async function createShops() {
       for (let j = 0; j < 10; ++j) {
         const { data: product } = await upload(
           `/sellers/${seller.id}/shops/${shop.id}/products`,
-          makeProduct(i * 10, j)
+          makeProduct(i, j)
         );
         console.log("product", product);
       }
@@ -83,7 +83,7 @@ async function fillCart(user) {}
 
 async function createCustomers() {
   try {
-    for (let i = 0; i < 5; ++i) {
+    for (let i = 1; i < 5; ++i) {
       let response = await client.post("/users/register", {
         username: `client${i}`,
         email: `client${i}@client.com`,
@@ -98,6 +98,7 @@ async function createCustomers() {
       });
       const user = response.data;
       console.log("user", user);
+      break;
       let cart;
       for (let j = 0; j < i; ++j) {
         const { data } = await client.post(
@@ -109,14 +110,12 @@ async function createCustomers() {
         );
         cart = data;
       }
-      console.log("cart", cart);
+      console.log("cart", [user, cart]);
 
-      if (i % 2 === 1 && cart) {
-        const { data: order } = await client.post(`/orders/${cart.id}`, {
-          payment_method: "cash",
-        });
-        console.log("order", order);
-      }
+      const { data: order } = await client.post(`/orders/${user.id}`, {
+        payment_method: "cash",
+      });
+      console.log("order", order);
     }
   } catch (e) {
     console.error(JSON.stringify(e.response?.data || e.message || e));
