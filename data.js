@@ -1,125 +1,143 @@
 const fs = require("fs");
-const DATA = {
-  "acordion.jpeg": [
-    "Acordion",
-    "Accordions are a family of box-shaped musical instruments of the bellows-driven free-reed aerophone type, colloquially referred to as a squeezebox",
-  ],
-  "bass.jpeg": [
-    "Bass",
-    "A bass musical instrument produces tones in the low-pitched range C4- C2. Basses belong to different families of instruments and can cover a wide range of musical roles.",
-  ],
+
+
+const BAR_DATA = {
   "burger1.jpeg": [
-    "Burger",
-    "A hamburger is a food consisting of fillings —usually a patty of ground meat, typically beef—placed inside a sliced bun or bread roll.",
+    "Burger clasica",
+    "Burger de 200 grs de carne con doble cheddar, tomate, lechuga y cebolla",
+      1100
   ],
   "burger2.jpeg": [
-    "Gourmet Burger",
-    'Hamburgers are often served with cheese, lettuce, tomato, onion, pickles, bacon, or chilis; condiments such as ketchup, mustard, mayonnaise, relish, or a "special sauce", often a variation of Thousand Island dressing',
+    "Burger Gourmet ",
+    'Burger de 200 grs de cane con queso dambo, lechuga, tomate, cebolla morada, pepinillos ' +
+    'y la salsa especial de la casa',
+      1250
   ],
   "burger3.jpeg": [
-    "Cheedar Burger",
-    'A hamburger is a food consisting of fillings —usually a patty of ground meat, typically beef—placed inside a sliced bun or bread roll. Condiments such as ketchup, mustard, mayonnaise, relish, or a "special sauce"',
+    "Burger Cheedar",
+    'Burger de 100 grs de carne con triple queso cheddar',
+      1300
   ],
-  "cake1.jpeg": [
-    "Dark Cake",
-    "Cake is a form of sweet food made from flour, sugar, and other ingredients, that is usually baked.",
+  "burga_vegana.jpeg": [
+    "Burger Vegana",
+    'Burger de medallon de quinoa, queso cheddar, tomate, cebolla morada y lechuga',
+      1300
   ],
-  "cake2.jpeg": [
-    "White Cake",
-    "In their oldest forms, cakes were modifications of bread, but cakes now cover a wide range of preparations that can be simple or elaborate, and that share features with other desserts such as pastries, meringues, custards, pies and.",
-  ],
-  "cake3.jpeg": [
-    "Rainbow Cake",
-    "Cakes were modifications of bread, but cakes now cover a wide range of preparations that can be simple or elaborate, and that share features with other desserts such as pastries, meringues, custards, and pies.",
-  ],
-  "cleaning.jpeg": [
-    "Cleaning Kit",
-    "lean Up To 10 Different Surfaces With Our Bleach Free Cleaner Spray! All New Clorox Multi-Purpose Refillable Cleaner Starter Kit With Crisp Lemon Fragrance",
-  ],
-  "cleaning2.jpeg": [
-    "Cleaning Gloves",
-    "2 Pairs Reusable Cleaning Gloves - Latex Free Kitchen Cleaning Gloves with Cotton Liner- Household Dishwashing Gloves, Non- Slip Waterproof (Medium, Blue+Pink) 4.6 out of 5 stars. 73. $7.99. $7. . 99 ($23.50/Pound) Get it as soon as Wed, May 4",
+  "burger_xxl.jpeg": [
+    "Burger XXL",
+    'Burger con 300 grs de carne, queso cheddar, tomate, lechuga y huevo frito',
+      1500
   ],
   "cocacola.jpeg": [
-    "Coke Can",
-    "Coca-Cola - 6pk/7.5 fl oz Cans. Coca-Cola. 4.6 out of 5 stars with 6652 ratings. 6652.",
+    "Coca-Cola común",
+    "Coca-Cola - 500ml.",
+      350
   ],
-  "cocacola.jpg": [
-    "Coke Collection",
-    "Coca-Cola - 6pk/7.5 fl oz Cans. Coca-Cola. 4.6 out of 5 stars with 6652 ratings. 6652.",
+  "milanesa.jpeg": [
+    "Milanesa con papas fritas",
+    "Milanesa de peceto acompañada de papas fritas y ensalada",
+      890
   ],
-  "cocacola1.jpeg": [
-    "Green Coke",
-    "Coca-Cola - 6pk/7.5 fl oz Cans. Coca-Cola. 4.6 out of 5 stars with 6652 ratings. 6652.",
+  "nuggets.jpeg":[
+      "Nuggets",
+      "Nuggets de pollo acompañadas de salsa barbacoa y honey beer mustard",
+      800
   ],
-  "cocacola2.jpeg": [
-    "Coke",
-    "Coca-Cola - 6pk/7.5 fl oz Cans. Coca-Cola. 4.6 out of 5 stars with 6652 ratings. 6652.",
+  "papas_cheddar.jpeg":[
+    "Papas fritas con cheddar y panceta",
+    "Papas fritas bañadas con queso cheddar y panceta crocante",
+      500
   ],
-  "icecream.jpg": [
-    "Ice Cream",
-    "It may be made from milk or cream and is flavoured with a sweetener, either sugar or an alternative, and a spice, such as cocoa or vanilla, or with fruit such as strawberries or peaches.",
+  "papas_provenzal.jpeg":[
+    "Papas fritas a la provenzal",
+    "Papas fritas con salsa provenzal", 560
   ],
-  "icecream0.jpeg": [
-    "Water Melon Ice Cream",
-    "Ice cream is a sweetened frozen food typically eaten as a snack or dessert. Spice, such as cocoa or vanilla, or with fruit such as strawberries or peaches.",
+  "botella_agua.jpeg":[
+    "Agua mineral villa vicencio 500ml",
+    "", 250
   ],
-  "icecream1.jpeg": [
-    "Ice Cream Bouquet",
-    "Ice cream may be made from milk or cream and is flavoured with a sweetener, either sugar or an alternative, and a spice, such as cocoa or vanilla, or with fruit such as strawberries or peaches.",
-  ],
-  "icecream2.jpeg": [
-    "Granizado",
-    "Frozen food typically eaten as a snack or dessert. It may be made from milk or cream and is flavoured with a sweetener.",
-  ],
-  "icecream3.jpeg": [
-    "Purple Ice Cream",
-    "Made from milk or cream and is flavoured with a sweetener, either sugar or an alternative, and a spice, such as cocoa or vanilla, or with fruit such as strawberries or peaches.",
-  ],
-  "milanesa.jpg": [
-    "Milanesa",
-    "The milanesa is a South American variation of the Lombard Veal Milanese, or the Austrian Wiener schnitzel.",
-  ],
-  "phone1.jpeg": [
-    "Office Phone",
-    "SAMSUNG Galaxy S22 Ultra Smartphone, Factory Unlocked Android Cell Phone, 128GB, 8K Camera & Video, Brightest Display, S Pen, Long Battery Life, Fast 4nm Processor, US Version, Green. 4.4 out of 5 stars. 33. ",
-  ],
-  "phone2.jpeg": [
-    "Vintage Phone",
-    "SAMSUNG Galaxy S22 Ultra Smartphone, Factory Unlocked Android Cell Phone, 128GB, 8K Camera & Video, Brightest Display, S Pen, Long Battery Life, Fast 4nm Processor, US Version, Green. 4.4 out of 5 stars. 33. ",
-  ],
+  "amber_cerveza.jpeg":[
+    "Cerveza Patagonia amber lager",
+    "", 450
+  ]
+
+}
+
+
+const DATA_PIZZA = {
   "pizza.jpeg": [
     "Pizza Morron",
-    "Pizza is a dish of Italian origin consisting of a usually round, flat base of leavened wheat-based dough topped with tomatoes, cheese, and often various other ingredients.",
+    "Pizza con salsa de tomates frescos, muzzarella, morrones rojos asados y orégano",
+      1600
   ],
-  "pizza.jpg": ["Pizza", "A small pizza is sometimes called a pizzetta."],
+  "albaca.jpeg": ["Pizza", "Pizza con salsa de tomates frescos, muzzarella oregano y albaca", 1400],
   "pizza1.jpeg": [
     "Pizza Veggie",
-    "Flat base of leavened wheat-based dough topped with tomatoes, cheese, and often various other ingredients, which is then baked at a high temperature, traditionally in a wood-fired oven. A small pizza is sometimes called a pizzetta.",
+    "Pizza a base de trigo cubierta con tomates, queso, y vegetales salteados..", 1500,
   ],
   "pizza2.jpeg": [
     "Pizza Gourmet",
-    "Tomatoes, cheese, and often various other ingredients, which is then baked at a high temperature, traditionally in a wood-fired oven. A small pizza is sometimes called a pizzetta.",
+    "Pizza a base de tomates, queso y peperonis.", 1850
   ],
-  "plant1.jpeg": [
-    "Shadow Plant",
-    "Photosynthetic nutrition (a characteristic possessed by all plants except some parasitic plants and underground orchids), in which chemical energy is produced from water, minerals, and carbon dioxide with the aid of pigments",
+  "fugazzeta.jpeg": [
+    "Fugazzeta",
+    "Pizza con muzzarela, cebolla, aceite de oliva y oregano.", 1800
   ],
-  "plant2.jpeg": [
-    "Desert Plant",
-    "plant, (kingdom Plantae), any multicellular eukaryotic life-form characterized by (1) photosynthetic nutrition",
+
+  "cake2.jpeg": [
+    "White Cake",
+    "Porcion de torta de vainilla, con cobertura de chocolate blanco", 500
   ],
-  "plant3.jpeg": [
-    "Shadow Plant 2 ",
-    "multicellular eukaryotic life-form characterized by (1) photosynthetic nutrition (a characteristic possessed by all plants aid of pigments and the radiant energy of the Sun, (2) essentially unlimited growth at localized regions,",
+  "cake3.jpeg": [
+    "Rainbow Cake",
+    "Porcion de 4 capas de bizcochuelo de intenso color unido por una dulce y suave crema de queso, con corazon de confites.",
+      550
   ],
-  "violin.jpeg": [
-    "Violin",
-    "The violin, sometimes known as a fiddle, is a wooden chordophone in the violin family. Most violins have a hollow wooden body.",
+  "cocacola.jpeg": [
+    "Coca-Cola común",
+    "Coca-Cola - 500ml.", 300
+  ],
+  "milanesa.jpeg": [
+    "Milanesa con papas fritas",
+    "Milanesa de peceto acompañada de papas fritas y ensalada", 800
+  ],
+  "botella_agua.jpeg":[
+    "Agua mineral villa vicencio 500ml",
+    "", 250
   ],
 };
 
+const DATA_ICE_CREAM = {
+  "icecream.jpeg": [
+    "Bocha de helado clasico",
+    "Dos bochas de helado de vainilla ", 490
+  ],
+  "icecream0.jpeg": [
+    "Helado de sandia",
+    "Bochas de helado de sandia", 400
+  ],
+  "icecream1.jpeg": [
+    "Ramo de helado",
+    "Multiples bochas de helado para compartir de frutilla, vainilla y uva", 800
+  ],
+  "icecream2.jpeg": [
+    "Granizado",
+    "Bochas de helado granizado", 550
+  ],
+  "icecream3.jpeg": [
+    "Helado mora",
+    "Bochas de helado a base de moras", 450
+  ],
+  "botella_agua.jpeg":[
+    "Agua mineral villa vicencio 500ml",
+    "", 250
+  ],
+};
+
+
+
 const images = fs.readdirSync("./images");
+
 const makeProduct = (seller, shop) => {
   const image = images[(seller * 10 + shop) % images.length];
   return {
@@ -130,4 +148,51 @@ const makeProduct = (seller, shop) => {
   };
 };
 
-module.exports = { makeProduct };
+
+const makeBarProducts = () => {
+  const products = []
+  for (const image_name in BAR_DATA) {
+
+    products.push(
+    {
+      image: `./images/${image_name}`,
+      name: `${BAR_DATA[image_name][0]}`,
+      description: BAR_DATA[image_name][1],
+      price: BAR_DATA[image_name][2],
+    });
+  }
+  return products
+};
+
+
+const makePizzaProducts = () => {
+  const products = []
+  for (const image_name in DATA_PIZZA) {
+
+    products.push(
+        {
+          image: `./images/${image_name}`,
+          name: `${DATA_PIZZA[image_name][0]}`,
+          description: DATA_PIZZA[image_name][1],
+          price: DATA_PIZZA[image_name][2],
+        });
+  }
+  return products
+};
+
+const makeIceCreamProducts = () => {
+  const products = []
+  for (const image_name in DATA_ICE_CREAM) {
+
+    products.push(
+        {
+          image: `./images/${image_name}`,
+          name: `${DATA_ICE_CREAM[image_name][0]}`,
+          description: DATA_ICE_CREAM[image_name][1],
+          price: DATA_ICE_CREAM[image_name][2],
+        });
+  }
+  return products
+};
+
+module.exports = { makeProduct, makeBarProducts, makePizzaProducts, makeIceCreamProducts };
